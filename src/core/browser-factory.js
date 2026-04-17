@@ -3,7 +3,8 @@ const { chromium } = require('playwright');
 
 async function createBrowserContext() {
     const browser = await chromium.launch({
-        headless: true,
+        headless: false,
+        channel: 'msedge',
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
