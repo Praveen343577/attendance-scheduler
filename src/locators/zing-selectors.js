@@ -3,6 +3,7 @@
 const ZingLocators = {
     auth: {
         url: 'https://portal.zinghr.com/2015/pages/authentication/login.aspx',
+        logoutUrlMatch: 'https://portal.zinghr.com/2015/pages/authentication/zing.aspx*',
         companyCodeInput: '#txtCompanyCode',
         empCodeInput: '#txtEmpCode',
         passwordInput: '#txtPassword',

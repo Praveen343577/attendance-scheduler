@@ -68,7 +68,7 @@ async function execute() {
         await logoutOption.click();
 
         logger.info('Awaiting session destruction routing...');
-        await page.waitForURL(`**${locators.auth.url}**`, { timeout: 15000 });
+        await page.waitForURL(`**${locators.auth.logoutUrlMatch}**`, { timeout: 15000 });
 
         logger.success('Process terminated successfully.');
     } catch (error) {
