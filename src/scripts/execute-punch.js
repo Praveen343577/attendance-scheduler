@@ -42,6 +42,8 @@ async function execute() {
             await botModal.waitFor({ state: 'visible', timeout: 5000 }); // Wait max 5 seconds
             logger.warn('Bot validation modal intercepted. Executing bypass click.');
             await botModal.click();
+            await page.waitForTimeout(1000); 
+            await page.locator(locators.auth.loginButton).click();
         } catch (e) {
             logger.info('No bot verification modal detected. Proceeding normally.');
         }
