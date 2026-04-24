@@ -39,10 +39,12 @@ async function execute() {
         logger.info('Polling for secondary bot verification modal...');
         try {
             const botModal = page.locator(locators.auth.botModalOkButton);
-            await botModal.waitFor({ state: 'visible', timeout: 5000 }); // Wait max 5 seconds
+            await botModal.waitFor({ state: 'visible', timeout: 5000 });
             logger.warn('Bot validation modal intercepted. Executing bypass click.');
             await botModal.click();
-            await page.waitForTimeout(1000); 
+            
+            await page.waitForTimeout(1000);
+            logger.info('Re-triggering login sequence post-modal...');
             await page.locator(locators.auth.loginButton).click();
         } catch (e) {
             logger.info('No bot verification modal detected. Proceeding normally.');
