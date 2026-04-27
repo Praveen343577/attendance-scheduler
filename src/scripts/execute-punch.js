@@ -43,9 +43,9 @@ async function execute() {
             logger.warn('Bot validation modal intercepted. Executing bypass click.');
             await botModal.click();
             
-            await page.waitForTimeout(1000);
+            await botModal.waitFor({ state: 'hidden' });
             logger.info('Re-triggering login sequence post-modal...');
-            await page.locator(locators.auth.loginButton).click();
+            await page.locator(locators.auth.loginButton).click({ force: true });
         } catch (e) {
             logger.info('No bot verification modal detected. Proceeding normally.');
         }
