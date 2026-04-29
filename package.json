@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/scripts/execute-punch.js",
+    "start": "node src/scripts/execute-batch.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

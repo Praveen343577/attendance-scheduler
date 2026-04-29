@@ -1,8 +1,7 @@
-// src/core/browser-factory.js
 const { chromium } = require('playwright');
 
-async function createBrowserContext() {
-    const browser = await chromium.launch({
+async function launchBrowser() {
+    return await chromium.launch({
         headless: false,
         channel: 'msedge',
         args: [
@@ -11,15 +10,15 @@ async function createBrowserContext() {
             '--disable-blink-features=AutomationControlled'
         ]
     });
+}
 
+async function createContext(browser) {
     const context = await browser.newContext({
         geolocation: { latitude: 18.7557, longitude: 73.8777 },
         permissions: ['geolocation']
     });
-
     const page = await context.newPage();
-
-    return { browser, context, page };
+    return { context, page };
 }
 
-module.exports = { createBrowserContext };
+module.exports = { launchBrowser, createContext };
