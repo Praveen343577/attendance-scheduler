@@ -11,9 +11,15 @@ async function execute() {
         const { browser, context, page } = await createBrowserContext();
         browserInstance = browser;
 
-        // Conditional routing based on system time (AM = Punch In, PM = Punch Out)
-        const currentHour = new Date().getHours();
-        const actionType = currentHour < 14 ? 'Punch In' : 'Punch Out';
+        const now = new Date();
+        const h = now.getHours();
+        const m = now.getMinutes();
+
+        let actionType;
+        if ((h === 8) || (h === 9 && m <= 30) || (h === 14 && m >= 30) || (h === 15 && m <= 30)) { actionType = 'Punch In'; } 
+        else if ((h === 17 && m >= 30) || (h === 18 && m <= 30) || (h === 23 && m >= 30)) { actionType = 'Punch Out'; } 
+        else { throw new Error('Execution time falls outside predefined punch windows.'); }
+
         // const actionType = 'Punch Out';
         const actionLocator = actionType === 'Punch In' ? locators.dashboard.punchInButton : locators.dashboard.punchOutButton;
 
