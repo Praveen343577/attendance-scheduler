@@ -13,8 +13,8 @@ async function execute() {
 
         // Conditional routing based on system time (AM = Punch In, PM = Punch Out)
         const currentHour = new Date().getHours();
-        // const actionType = currentHour < 14 ? 'Punch In' : 'Punch Out';
-        const actionType = 'Punch Out';
+        const actionType = currentHour < 14 ? 'Punch In' : 'Punch Out';
+        // const actionType = 'Punch Out';
         const actionLocator = actionType === 'Punch In' ? locators.dashboard.punchInButton : locators.dashboard.punchOutButton;
 
         logger.info(`Resolved intent: ${actionType} based on local time (${currentHour}:00)`);
