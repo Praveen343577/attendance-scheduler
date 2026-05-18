@@ -16,11 +16,21 @@ async function execute() {
         const m = now.getMinutes();
 
         let actionType;
-        if ((h === 8) || (h === 9 && m <= 30) || (h === 14 && m >= 30) || (h === 15 && m <= 30)) { actionType = 'Punch In'; } 
-        else if ((h === 17 && m >= 30) || (h === 18 && m <= 30) || (h === 23 && m >= 30)) { actionType = 'Punch Out'; } 
-        else { throw new Error('Execution time falls outside predefined punch windows.'); }
 
-        // const actionType = 'Punch Out';
+        // Manual overrides (uncomment to force execution regardless of time):
+        // actionType = 'Punch In';
+        // actionType = 'Punch Out';
+
+        if (!actionType) {
+            if ((h === 8) || (h === 9 && m <= 30) || (h === 14 && m >= 30) || (h === 15 && m <= 30)) {
+                actionType = 'Punch In';
+            } else if ((h === 17 && m >= 30) || (h === 18 && m <= 30) || (h === 23 && m >= 30)) {
+                actionType = 'Punch Out';
+            } else {
+                throw new Error('Execution time falls outside predefined punch windows.');
+            }
+        }
+
         const actionLocator = actionType === 'Punch In' ? locators.dashboard.punchInButton : locators.dashboard.punchOutButton;
 
         logger.info(`Resolved intent: ${actionType} based on local time (${currentHour}:00)`);
