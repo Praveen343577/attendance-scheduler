@@ -58,14 +58,14 @@ async function execute() {
             await botModal.waitFor({ state: 'visible', timeout: 5000 });
             logger.warn('Bot validation modal intercepted. Executing bypass click.');
             await botModal.click();
-            
+
             await botModal.waitFor({ state: 'hidden' });
             logger.info('Re-triggering login sequence post-modal...');
             await page.locator(locators.auth.loginButton).click({ force: true });
         } catch (e) {
             logger.info('No bot verification modal detected. Proceeding normally.');
         }
-        
+
         logger.info('Awaiting dashboard routing resolution...');
         await page.waitForURL(`**${locators.dashboard.urlRoutingMatch}**`, { timeout: 30000 });
 
@@ -82,7 +82,7 @@ async function execute() {
 
         logger.info('Initiating session teardown...');
         await page.locator(locators.dashboard.avatarButton).click();
-        
+
         const logoutOption = page.locator(locators.dashboard.logoutMenuOption);
         await logoutOption.waitFor({ state: 'visible' });
         await logoutOption.click();
