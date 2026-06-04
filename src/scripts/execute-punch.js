@@ -33,7 +33,7 @@ async function execute() {
 
         const actionLocator = actionType === 'Punch In' ? locators.dashboard.punchInButton : locators.dashboard.punchOutButton;
 
-        logger.info(`Resolved intent: ${actionType} based on local time (${currentHour}:00)`);
+        logger.info(`Resolved intent: ${actionType} based on local time (${h}:00)`);
 
         logger.info('Navigating to authentication portal...');
         await page.goto(locators.auth.url, { waitUntil: 'domcontentloaded' });
