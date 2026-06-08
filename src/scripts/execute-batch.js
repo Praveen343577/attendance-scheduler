@@ -35,15 +35,17 @@ async function startBatch() {
         const shift = shiftConfig[user.shift];
         if (!shift) continue;
 
-        let actionType = null;
-        if (currentHHMM.startsWith(shift.punchInTarget.split(':')[0])) {
-            actionType = 'Punch In';
-        } else if (currentHHMM.startsWith(shift.punchOutTarget.split(':')[0])) {
-            actionType = 'Punch Out';
-        }
+        const actionType = 'Punch Out';
+        // let actionType = null;
+        // if (currentHHMM.startsWith(shift.punchInTarget.split(':')[0])) {
+        //     actionType = 'Punch In';
+        // } else if (currentHHMM.startsWith(shift.punchOutTarget.split(':')[0])) {
+        //     actionType = 'Punch Out';
+        // }
 
         if (actionType) {
-            const delayMs = Math.floor(Math.random() * (120000 - 30000) + 30000); 
+            const delayMs = Math.floor(Math.random() * (12000 - 3000) + 3000
+        ); 
             logger.info(`[${user.empCode}] Throttle active. Sleeping for ${(delayMs / 1000).toFixed(1)}s to mitigate POST rate limits.`);
             await sleep(delayMs);
 

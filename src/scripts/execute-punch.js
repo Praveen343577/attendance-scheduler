@@ -28,8 +28,10 @@ async function executePunch(browser, companyCode, empCode, password, actionType)
             await botModal.waitFor({ state: 'visible', timeout: 5000 });
             await botModal.click();
             await botModal.waitFor({ state: 'hidden' });
-            await page.locator(locators.auth.loginButton).click({ force: true });
-        } catch (e) {}
+        } catch (e) {
+            logger.warn(`[${empCode}] Bot modal did not appear or was missed.`);
+        }
+        await page.locator(locators.auth.loginButton).click({ force: true });
         
         await page.waitForURL(`**${locators.dashboard.urlRoutingMatch}**`, { timeout: 30000 });
 
